@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>TEST</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script>
+            console.log("TEST");
+            window.ondevicemotion = function(event) { 
+                var ax = event.accelerationIncludingGravity.x
+                var ay = event.accelerationIncludingGravity.y
+                var az = event.accelerationIncludingGravity.z
+            
+                document.querySelector("#x_acc").innerHTML = "X = " + ax;
+                document.querySelector("#y_acc").innerHTML = "Y = " + ay;
+                document.querySelector("#z_acc").innerHTML = "Z = " + az;
+
+                document.querySelector("#x_acc2").innerHTML = "X = " + event.acceleration.x;
+                document.querySelector("#y_acc2").innerHTML = "Y = " + event.acceleration.y;
+                document.querySelector("#z_acc2").innerHTML = "Z = " + event.acceleration.z;
+            }
+            
+            window.addEventListener('devicemotion', (event) => {
+                console.log(`${event.acceleration.x} m/s2`);
+                document.querySelector("#mag_alpha2").innerHTML = "acc2x = " + event.acceleration.x;
+                document.querySelector("#mag_beta2").innerHTML = "acc2y = " + event.acceleration.y;
+                document.querySelector("#mag_gamma2").innerHTML = "acc2z = " + event.acceleration.z;
+              });
+
+            window.addEventListener("deviceorientation", function(event) {
+                document.querySelector("#mag_alpha").innerHTML = "alpha = " + event.alpha;
+                document.querySelector("#mag_beta").innerHTML = "beta = " + event.beta;
+                document.querySelector("#mag_gamma").innerHTML = "gamma = " + event.gamma;
+            });
+            
+
+        </script>
+    </head>
+    <body>
+        <p id="x_acc">No accelerometer found.</p>
+        <p id="y_acc"></p>
+        <p id="z_acc"></p>
+
+<br />
+<p id="x_acc2">No accelerometer found.</p>
+        <p id="y_acc2"></p>
+        <p id="z_acc2"></p>
+<br />
+
+<p id="mag_alpha">No magnetometer found.</p>
+<p id="mag_beta"></p>
+<p id="mag_gamma"></p>
+    
+<p id="mag_alpha2">No magnetometer found.</p>
+<p id="mag_beta2"></p>
+<p id="mag_gamma2"></p>
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    
+    </body>
+</html>
