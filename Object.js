@@ -1,8 +1,12 @@
 class RenderObject {
-    constructor(ctx) {
-        this.ctx = ctx;
+    constructor() {
     }
-    render() {
+    render(ctx) {
+    }
+
+    getRenderObjects() {
 
     }
+
+    collide(x, y) { }
 }
