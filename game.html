@@ -8,17 +8,97 @@
     <title>Game</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="Object.js"></script>
     <script src="Boundary.js"></script>
     <script src="Ball.js"></script>
     <script src="Field.js"></script>
     <script src="mainScript.js" defer></script>
-    <link rel="stylesheet" href="css.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+         }
+        body, html {
+            position: absolute;
+            height:100%;
+            width:100%;
+         }
+         #navbar {
+            flex: 0 2 auto;
+         }
+         #box {
+            display: flex;
+            flex-flow: column;
+            height: 100%;
+            width: 100%;
+          }
+        #myCanvas {
+            flex: 1 2 auto;
+            width: 100%;
+            height: 100%;
+         }
+         #sliders {
+          position: fixed;
+          background-color: lightblue;
+          right: 10px;
+          top: 90px;
+         }
+    </style>
 </head>
 
 <body>
-    <canvas id="myCanvas" width="1000" height="1000"></canvas>
+    <div id="box">
+    <nav id="navbar" class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Play</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./index.html">Home</a></li>
+              <li><a href="./howtoplay.html">How to play</a></li>
+              <li><a href="./galerie.html">Galerie</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+<div id="sliders" class="col-sm-3">
+  <div  class="alert-dark border">
+    <div class="row">
+      <div class="col-sm-10">
+        <label>Acceleration X</label>
+          <input oninput="changeaccx()"" id="accx" type="range" value="0" min="-10" max="10">
+      </div>
+      <div class="col-sm-2">
+        <br />
+        <div id="accxresult">0</div>
+      </div>
+     </div> 
+   <div class="row">
+    <div class="col-sm-10">
+      <label>Acceleration Y</label>
+      <input oninput="changeaccy()"" id="accy" type="range" value="0" min="-10" max="10">
+    
+    </div>
+    <div class="col-sm-2">
+      <br />
+      <div id="accyresult">0</div>
+    </div>
+   </div>
+   
+        
+      </div>   
+</div>
+    <canvas id="myCanvas"></canvas>
+</div>
 </body>
 
 </html>

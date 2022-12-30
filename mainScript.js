@@ -1,14 +1,34 @@
 var canvas = document.getElementById("myCanvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 var ctx = canvas.getContext("2d");
+
 let f = new Field(canvas.width, canvas.height);
+function changeaccx() {
+    var x = document.getElementById("accx").value;
+    var y = document.getElementById("accy").value;
+    f.setAcc(x, y);
+    document.getElementById("accxresult").innerHTML = x;
+}
+
+function changeaccy() {
+    var x = document.getElementById("accx").value;
+    var y = document.getElementById("accy").value;
+    f.setAcc(x, y);
+    document.getElementById("accyresult").innerHTML = y;
+}
 window.setInterval(() => { f.timeStep(); f.getRenderObjects().map((el) => { el.render(ctx); }); }, 100);
 
 window.ondevicemotion = function (event) {
+    document.getElementById("accx").disabled = true;
+    document.getElementById("accy").disabled = true;
     var ax = event.accelerationIncludingGravity.x;
     var ay = event.accelerationIncludingGravity.y;
     if (ax && ay) {
         f.setAcc(-ax, ay);
     }
+    document.getElementById("accyresult").innerHTML = Math.round(ay);
+    document.getElementById("accxresult").innerHTML = Math.round(ax);
 }
 
 canvas.addEventListener("mousedown", (e) => {
@@ -30,7 +50,8 @@ canvas.addEventListener("touchstart", function (e) {
 function getMousePos(canvasDom, mouseEvent) {
     var rect = canvasDom.getBoundingClientRect();
     return {
-        x: mouseEvent.clientX - rect.left,
-        y: mouseEvent.clientY - rect.top
+        x: mouseEvent.clientX,
+        y: mouseEvent.clientY
     };
 }
+

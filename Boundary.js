@@ -19,10 +19,10 @@ class Boundary extends RenderObject {
         ctx.closePath();
     }
 
-    collide_x(x, y) {
-        return ((this.pos_x - x) <= this.width && (this.pos_x - x) >= 0);
+    collide_x(x, y, r) {
+        return ((this.pos_x - x) <= this.width + r/2 && (this.pos_x - x) >= r/2);
     }
-    collide_y(x, y) {
-        return ((this.pos_y - y) <= this.height && (this.pos_y - y) >= 0);
+    collide_y(x, y, r) {
+        return ((this.pos_y - y) <= this.height + r/2 && (this.pos_y - y) >= r/2);
     }
 }
