@@ -1,9 +1,13 @@
 var canvas = document.getElementById("myCanvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 var ctx = canvas.getContext("2d");
-
 let f = new Field(canvas.width, canvas.height);
+
+function resiveCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = canvas.offsetHeight;
+    f.resize(canvas.width, canvas.height);
+}
+
 function changeaccx() {
     var x = document.getElementById("accx").value;
     var y = document.getElementById("accy").value;
@@ -51,7 +55,8 @@ function getMousePos(canvasDom, mouseEvent) {
     var rect = canvasDom.getBoundingClientRect();
     return {
         x: mouseEvent.clientX,
-        y: mouseEvent.clientY
+        y: mouseEvent.clientY - (window.innerHeight - canvas.offsetHeight)
     };
 }
 
+new ResizeObserver(resiveCanvas).observe(canvas);

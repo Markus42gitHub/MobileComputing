@@ -45,7 +45,22 @@ class Field extends RenderObject {
     }
 
     addBall(x, y) {
-        this.ballList.push(new Ball(x, y, this.wb, this.accx, this.accy));
+        if (this.ballList.some(e => (e.x - x) * (e.x - x) + (e.y - y) * (e.y - y) <= e.r * e.r)) {
+            this.ballList = this.ballList.filter( e => (e.x - x) * (e.x - x) + (e.y - y) * (e.y - y) > e.r * e.r);
+        } else {
+            this.ballList.push(new Ball(x, y, this.wb, this.accx, this.accy));
+        }
+        this.objects = this.ballList.concat(this.boundaryList);
+    }
+
+    resize(width, height) {
+        var ratio_x = width / this.width;
+        var ratio_y = height / this.height;
+        this.wb = 0.01 * width;
+        this.height = height;
+        this.width = width;
+        this.ballList.forEach(e => {e.x = e.x * ratio_x; e.y = e.y * ratio_y, e.r = 2 * this.wb});
+        this.boundaryList = [new Boundary(0, 0, width, this.wb), new Boundary(0, 0, this.wb, height), new Boundary(0, height - this.wb, width, this.wb), new Boundary(width - this.wb, 0, this.wb, height)];
         this.objects = this.ballList.concat(this.boundaryList);
     }
 }
